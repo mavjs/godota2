@@ -1,0 +1,22 @@
+{
+	"ImportPath": "github.com/mavjs/godota2",
+	"GoVersion": "go1.6",
+	"GodepVersion": "v74",
+	"Deps": [
+		{
+			"ImportPath": "github.com/jmoiron/sqlx",
+			"Comment": "sqlx-v1.1-73-g7396209",
+			"Rev": "7396209bbeada6a4fcc28aa9408f89b2e71cac39"
+		},
+		{
+			"ImportPath": "github.com/jmoiron/sqlx/reflectx",
+			"Comment": "sqlx-v1.1-73-g7396209",
+			"Rev": "7396209bbeada6a4fcc28aa9408f89b2e71cac39"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-sqlite3",
+			"Comment": "v1.1.0-78-gb5c99a7",
+			"Rev": "b5c99a720374818b629fd1fbf6d2cbb4fb9a5644"
+		}
+	]
+}
