@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 	"log"
@@ -26,7 +27,7 @@ type Player struct {
 	Status   string `db,json:"status"`
 	Updated  time.Time
 	Team     int `db,json:"team_id"`
-	Country  string
+	Country  sql.NullString
 	MMR      int
 	Rank     int
 }
