@@ -22,10 +22,10 @@ func init() {
 type Player struct {
 	Id       int
 	Name     string
-	FullName string `db,json:"full_name"`
-	Status   string `db,json:"status"`
+	FullName string         `db,json:"full_name"`
+	Status   sql.NullString `db,json:"status"`
 	Updated  sql.NullString
-	Team     int `db,json:"team_id"`
+	Team     sql.NullInt64 `db,json:"team_id"`
 	Country  sql.NullString
 	MMR      sql.NullInt64
 	Rank     sql.NullInt64
