@@ -18,6 +18,15 @@ func index(writer http.ResponseWriter, request *http.Request) {
 }
 
 func players(writer http.ResponseWriter, request *http.Request) {
+	writer.Header().Set("Content-Type", "application/json")
+	players, err := Players()
+	if err != nil {
+		panic(err)
+	}
+	if err := json.NewEncoder(writer).Encode(players); err != nil {
+		panic(err)
+	}
+
 }
 
 func teams(writer http.ResponseWriter, request *http.Request) {
