@@ -6,7 +6,6 @@ import (
 	_ "github.com/lib/pq"
 	"log"
 	"os"
-	"time"
 )
 
 var Db *sqlx.DB
