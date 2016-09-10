@@ -1,18 +1,18 @@
 package main
 
 import (
-	"database/sql"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 	"log"
+	"os"
 	"time"
 )
 
-var Db *sql.DB
+var Db *sqlx.DB
 
 func init() {
 	var err error
-	Db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	Db, err = sqlx.Connect("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -37,7 +37,7 @@ type Team struct {
 	Tag  string
 }
 
-func Players() (player []Player, err error) {
+func Players() (players []Player, err error) {
 	rows, err := Db.Query("SELECT id, name, full_name, status, updated, team_id, country, mmr, rank FROM rosters_player")
 	if err != nil {
 		return
