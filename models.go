@@ -28,14 +28,14 @@ type Player struct {
 	Updated  time.Time
 	Team     int `db,json:"team_id"`
 	Country  sql.NullString
-	MMR      int
-	Rank     int
+	MMR      sql.NullInt64
+	Rank     sql.NullInt64
 }
 
 type Team struct {
 	Id   int
 	Name string
-	Tag  string
+	Tag  sql.NullString
 }
 
 func Players() (players []Player, err error) {
