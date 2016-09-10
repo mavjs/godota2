@@ -25,7 +25,7 @@ type Player struct {
 	Name     string
 	FullName string `db,json:"full_name"`
 	Status   string `db,json:"status"`
-	Updated  time.Time
+	Updated  sql.NullString
 	Team     int `db,json:"team_id"`
 	Country  sql.NullString
 	MMR      sql.NullInt64
