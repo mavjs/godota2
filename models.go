@@ -6,6 +6,7 @@ import (
 	_ "github.com/lib/pq"
 	"log"
 	"os"
+	"strconv"
 )
 
 var Db *sqlx.DB
@@ -19,22 +20,46 @@ func init() {
 	return
 }
 
+type NullString struct {
+	sql.NullString
+}
+
+type NullInt64 struct {
+	sql.NullInt64
+}
+
 type Player struct {
 	Id       int
 	Name     string
-	FullName string         `db,json:"full_name"`
-	Status   sql.NullString `db,json:"status"`
-	Updated  sql.NullString
-	Team     sql.NullInt64 `db,json:"team_id"`
-	Country  sql.NullString
-	MMR      sql.NullInt64
-	Rank     sql.NullInt64
+	FullName NullString `db,json:"full_name"`
+	Status   NullString `db,json:"status"`
+	Updated  NullString
+	Team     NullInt64 `db,json:"team_id"`
+	Country  NullString
+	MMR      NullInt64
+	Rank     NullInt64
 }
 
 type Team struct {
 	Id   int
 	Name string
-	Tag  sql.NullString
+	Tag  NullString
+}
+
+func (nstr NullString) MarshalText() ([]byte, error) {
+	if nstr.Valid {
+		return []byte(nstr.String), nil
+	} else {
+		return []byte("null"), nil
+	}
+}
+
+func (nint NullInt64) MarshalText() ([]byte, error) {
+	if nint.Valid {
+		return []byte(strconv.FormatInt(nint.Int64, 10)), nil
+	} else {
+		return []byte("null"), nil
+	}
 }
 
 func Players() (players []Player, err error) {
