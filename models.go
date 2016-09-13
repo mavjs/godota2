@@ -29,28 +29,28 @@ type NullInt64 struct {
 }
 
 type Player struct {
-	Id       int
-	Name     string
-	FullName NullString `db,json:"full_name"`
-	Status   NullString `db,json:"status"`
-	Updated  NullString
-	Team     NullInt64 `db,json:"team_id"`
-	Country  NullString
-	MMR      NullInt64
-	Rank     NullInt64
+	Id       int        `json:"id"`
+	Name     string     `json:"name"`
+	FullName NullString `db:"full_name" json:"full_name"`
+	Status   NullString `json:"status"`
+	Updated  NullString `json:"updated"`
+	Team     NullInt64  `db:"team_id" json:"team_id"`
+	Country  NullString `json:"country"`
+	MMR      NullInt64  `json:"mmr"`
+	Rank     NullInt64  `json:"rank"`
 }
 
 type Team struct {
-	Id   int
-	Name string
-	Tag  NullString
+	Id   int        `json:"id"`
+	Name string     `json:"name"`
+	Tag  NullString `json:"tag"`
 }
 
 func (nstr NullString) MarshalText() ([]byte, error) {
 	if nstr.Valid {
 		return []byte(nstr.String), nil
 	} else {
-		return []byte("null"), nil
+		return nil, nil
 	}
 }
 
@@ -58,7 +58,7 @@ func (nint NullInt64) MarshalText() ([]byte, error) {
 	if nint.Valid {
 		return []byte(strconv.FormatInt(nint.Int64, 10)), nil
 	} else {
-		return []byte("null"), nil
+		return nil, nil
 	}
 }
 
