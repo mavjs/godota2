@@ -38,13 +38,13 @@ type Team struct {
 }
 
 func Players() (players []Player, err error) {
-	rows, err := Db.Query("SELECT id, name, full_name, status, updated, team_id, country, mmr, rank FROM rosters_player")
+	rows, err := Db.Queryx("SELECT id, name, full_name, status, updated, team_id, country, mmr, rank FROM rosters_player")
 	if err != nil {
 		return
 	}
 	for rows.Next() {
 		player := Player{}
-		if err = rows.Scan(&player.Id, &player.Name, &player.FullName, &player.Status, &player.Updated, &player.Team, &player.Country, &player.MMR, &player.Rank); err != nil {
+		if err = rows.StructScan(&player); err != nil {
 			return
 		}
 		players = append(players, player)
